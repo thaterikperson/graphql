@@ -6,8 +6,8 @@ defmodule GraphQL.Lang.AST.CompositeVisitorTest do
   alias GraphQL.Lang.AST.Reducer
   alias GraphQL.Lang.AST.CompositeVisitor
 
-  alias GraphQL.TestSupport.VisitorImplementations.{CallReverser, TracingVisitor}
-  
+  alias GraphQL.TestSupport.VisitorImpl.{CallReverser, TracingVisitor}
+
   test "Composed Visitors are called in the correct order" do
     v0 = %CallReverser{}
     v1 = %TracingVisitor{name: "v1"}
@@ -36,5 +36,3 @@ defmodule GraphQL.Lang.AST.CompositeVisitorTest do
     ]
   end
 end
-
-

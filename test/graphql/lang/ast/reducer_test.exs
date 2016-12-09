@@ -6,15 +6,15 @@ defmodule GraphQL.Lang.AST.ReducerTest do
   alias GraphQL.Lang.AST.Reducer
   alias GraphQL.Lang.AST.CompositeVisitor
 
-  alias GraphQL.TestSupport.VisitorImplementations.{
+  alias GraphQL.TestSupport.VisitorImpl.{
     CallReverser,
     TracingVisitor,
-    BalancedCallsVisitor
+    BalancedCalls
   }
 
   test "Enter and leave calls should be balanced" do
     {:ok, ast} = Parser.parse "type Person {name: String}"
-    count = Reducer.reduce(ast, %BalancedCallsVisitor{}, %{count: 0})
+    count = Reducer.reduce(ast, %BalancedCalls{}, %{count: 0})
     assert count == 0
   end
 

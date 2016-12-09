@@ -1,5 +1,5 @@
 
-defmodule GraphQL.TestSupport.VisitorImplementations do
+defmodule GraphQL.TestSupport.VisitorImpl do
 
   alias GraphQL.Lang.AST.Visitor
   alias GraphQL.Lang.AST.PostprocessingVisitor
@@ -29,11 +29,11 @@ defmodule GraphQL.TestSupport.VisitorImplementations do
     end
   end
 
-  defmodule BalancedCallsVisitor do
+  defmodule BalancedCalls do
     defstruct name: "balanced calls visitor"
   end
 
-  defimpl Visitor, for: BalancedCallsVisitor do
+  defimpl Visitor, for: BalancedCalls do
     def enter(_visitor, _node, accumulator) do
       {:continue, %{accumulator | count: accumulator[:count] + 1}}
     end
@@ -43,8 +43,7 @@ defmodule GraphQL.TestSupport.VisitorImplementations do
     end
   end
 
-  defimpl PostprocessingVisitor, for: BalancedCallsVisitor do
+  defimpl PostprocessingVisitor, for: BalancedCalls do
     def finish(_visitor, accumulator), do: accumulator[:count]
   end
 end
-
